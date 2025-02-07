@@ -382,7 +382,7 @@ static int oqs_sig_sign(void *vpoqs_sigctx, unsigned char *sig, size_t *siglen,
         }
         if (oqsxkey->evp_info->keytype == EVP_PKEY_RSA) {
             if (EVP_PKEY_CTX_set_rsa_padding(classical_ctx_sign,
-                                             RSA_PKCS1_PADDING) <= 0) {
+                                             RSA_PKCS1_PSS_PADDING) <= 0) {
                 ERR_raise(ERR_LIB_USER, ERR_R_FATAL);
                 goto endsign;
             }
@@ -752,7 +752,7 @@ static int oqs_sig_verify(void *vpoqs_sigctx, const unsigned char *sig,
             goto endverify;
         }
         if (oqsxkey->evp_info->keytype == EVP_PKEY_RSA) {
-            if (EVP_PKEY_CTX_set_rsa_padding(ctx_verify, RSA_PKCS1_PADDING) <=
+            if (EVP_PKEY_CTX_set_rsa_padding(ctx_verify, RSA_PKCS1_PSS_PADDING) <=
                 0) {
                 ERR_raise(ERR_LIB_USER, OQSPROV_R_WRONG_PARAMETERS);
                 goto endverify;
