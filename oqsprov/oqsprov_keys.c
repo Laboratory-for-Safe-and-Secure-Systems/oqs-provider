@@ -1744,7 +1744,7 @@ int oqsx_key_fromdata(OQSX_KEY *key, const OSSL_PARAM params[],
             ERR_raise(ERR_LIB_USER, OQSPROV_R_INVALID_ENCODING);
             return 0;
         }
-        if (key->privkeylen != pp1->data_size) {
+        if (key->privkeylen < pp1->data_size) {
             ERR_raise(ERR_LIB_USER, OQSPROV_R_INVALID_SIZE);
             return 0;
         }
